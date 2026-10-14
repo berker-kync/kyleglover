@@ -3,5 +3,15 @@
     "compatibility_date": "2026-10-01",
     "assets": {
         "directory": "./public"
-    }
+    },
+    "routes": [
+        {
+            "pattern": "kyleglover.me",
+            "custom_domain": true
+        },
+        {
+            "pattern": "www.kyleglover.me",
+            "custom_domain": true
+        }
+    ]
 }
