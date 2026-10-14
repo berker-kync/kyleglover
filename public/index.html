@@ -1,934 +1,406 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kyle Glover — Project Manager</title>
+  <title>Kyle Glover</title>
 
-  <meta name="description" content="Strategic operations and project management professional leading cross-functional teams, managing $750K+ budgets, and delivering 150+ large-scale events a year at UNC Wilmington.">
+  <meta name="description" content="Kyle Glover — project manager for campus events and engagement at UNC Wilmington.">
   <meta name="author" content="Kyle Glover">
-
-  <!-- Open Graph Meta Tags -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Kyle Glover — Project Manager">
-  <meta property="og:description" content="Strategic operations and project management professional at UNC Wilmington.">
-  <!-- TODO: Replace with your actual domain once deployed -->
-  <meta property="og:url" content="https://thekyleglover.com/">
-  <!-- TODO: Add an og:image URL once you have a social share preview image -->
-  <!-- <meta property="og:image" content="https://thekyleglover.com/og-image.jpg"> -->
+  <meta property="og:title" content="Kyle Glover">
+  <meta property="og:description" content="Project manager for campus events and engagement at UNC Wilmington.">
+  <meta property="og:url" content="https://kyleglover.me/">
+  <link rel="canonical" href="https://kyleglover.me/">
 
-  <!-- Inline Monogram "KG" Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%232B2621'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' fill='%23F3EDE2' font-family='Georgia, serif' font-weight='600' font-size='12' letter-spacing='-0.5'%3EKG%3C/text%3E%3C/svg%3E">
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%232B2621'/%3E%3Ctext x='50%25' y='56%25' dominant-baseline='middle' text-anchor='middle' fill='%23F3EDE2' font-family='Georgia, serif' font-size='14'%3EKG%3C/text%3E%3C/svg%3E">
 
-  <!-- Google Fonts: Fraunces (warm soft optical display serif) & Inter (clean sans) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap"
+    rel="stylesheet">
 
   <style>
-    /* ==========================================================================
-       DESIGN TOKENS
-       ========================================================================== */
     :root {
-      --paper:      #F3EDE2;
-      --paper-deep: #E8DFCF;
-      --ink:        #2B2621;
-      --muted:      #6B6053;   /* 4.7:1 on --paper, 4.5:1 on --paper-deep */
-      --line:       #D6CBB8;
-      --accent:     #8F4526;   /* Darkened from #A4532F → 4.6:1 on --paper-deep */
+      --paper: #F3EDE2;
+      --paper-deep: #E6DCCA;
+      --ink: #2B2621;
+      --muted: #6B6053;
+      --line: #D6CBB8;
+      --brown: #8F4526;
 
-      --font-serif: "Fraunces", Georgia, serif;
-      --font-sans:  "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --serif: "Instrument Serif", Georgia, serif;
+      --sans: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --pad: clamp(24px, 4.5vw, 64px);
+      --padY: clamp(22px, 4.5vh, 48px);
     }
 
-    /* ==========================================================================
-       RESET & VIEWPORT-LOCK
-       ========================================================================== */
-    *, *::before, *::after {
+    *,
+    *::before,
+    *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
-    html, body {
-      height: 100dvh;
-      max-height: 100dvh;
-      overflow: hidden;
+    html,
+    body {
+      height: 100%;
       background: var(--paper);
       color: var(--ink);
-      font-family: var(--font-sans);
-      font-size: 15px;
-      line-height: 1.45;
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.5;
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
     }
 
-    /* Paper noise overlay */
-    .paper-grain {
+    .grain {
       position: fixed;
       inset: 0;
       width: 100%;
       height: 100%;
       pointer-events: none;
-      z-index: 9999;
-      opacity: 0.032;
+      opacity: 0.035;
+      z-index: 10;
     }
 
-    .sr-only {
-      position: absolute;
-      width: 1px; height: 1px;
-      padding: 0; margin: -1px;
-      overflow: hidden;
-      clip: rect(0,0,0,0);
-      white-space: nowrap;
-      border: 0;
-    }
-
-    /* ==========================================================================
-       TWO-PANEL LAYOUT
-       ========================================================================== */
-    .viewport-shell {
+    /* ======================= SPLIT LAYOUT ======================= */
+    .split {
+      min-height: 100dvh;
       display: grid;
       grid-template-columns: 42% 58%;
-      height: 100dvh;
-      max-height: 100dvh;
-      width: 100%;
-      overflow: hidden;
     }
 
-    /* ==========================================================================
-       LEFT PANEL — IDENTITY
-       ========================================================================== */
-    .panel-left {
+    /* ---------- Left: name panel ---------- */
+    .side {
+      position: relative;
       background: var(--paper-deep);
-      border-right: 1px solid var(--line);
-      padding: clamp(24px, 4vh, 52px) clamp(24px, 3.8vw, 52px);
+      padding: var(--padY) var(--pad);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      height: 100%;
-      overflow: hidden;
-      position: relative;
     }
 
-    /* Faint background monogram watermark — anchored bottom-right,
-       below the text block, clipped to the panel so it doesn't
-       bleed into the vertical divider. */
-    .panel-left::before {
-      content: "KG";
+    /* Brown liner along the edge of the panel, drawn in on load */
+    .side::after {
+      content: "";
       position: absolute;
-      right: clamp(8px, 1.5vw, 24px);
-      bottom: clamp(40px, 8vh, 80px);
-      font-family: var(--font-serif);
-      font-size: clamp(160px, 18vw, 280px);
-      font-weight: 700;
-      line-height: 1;
-      letter-spacing: -0.04em;
-      color: var(--ink);
-      opacity: 0.022;
-      pointer-events: none;
-      user-select: none;
-      font-variation-settings: "opsz" 144;
+      top: 0;
+      right: 0;
+      width: 1px;
+      height: 100%;
+      background: var(--brown);
+      transform-origin: top;
+      animation: draw 1.2s cubic-bezier(.65, 0, .35, 1) both;
     }
 
-    /* Monogram badge */
-    .monogram-badge {
-      width: clamp(32px, 3.6vh, 40px);
-      height: clamp(32px, 3.6vh, 40px);
+    @keyframes draw {
+      from {
+        transform: scaleY(0);
+      }
+    }
+
+    .mark {
+      display: inline-grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--brown);
       border-radius: 50%;
-      border: 1px solid var(--line);
-      background: var(--paper);
-      color: var(--ink);
-      font-family: var(--font-serif);
-      font-size: clamp(12px, 1.3vh, 14px);
-      font-weight: 600;
-      letter-spacing: -0.5px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      user-select: none;
+      font-family: var(--serif);
+      font-size: 17px;
+      color: var(--brown);
     }
 
-    /* Identity body */
-    .identity-body {
-      display: flex;
-      flex-direction: column;
+    .name {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(64px, min(9vw, 15vh), 150px);
+      line-height: 0.9;
+      letter-spacing: -0.02em;
     }
 
-    .eyebrow-label {
-      font-size: clamp(10px, 1.05vw, 11.5px);
-      letter-spacing: 0.13em;
-      text-transform: uppercase;
-      font-weight: 600;
-      color: var(--muted);
-      margin-bottom: clamp(10px, 1.6vh, 14px);
+    .name span {
+      display: block;
     }
 
-    .person-name {
-      font-family: var(--font-serif);
-      font-size: clamp(44px, 4.8vw, 78px);
-      font-weight: 500;
-      line-height: 0.92;
-      letter-spacing: -0.03em;
-      color: var(--ink);
-      font-variation-settings: "opsz" 72, "SOFT" 60;
-      margin-bottom: clamp(12px, 2vh, 20px);
+    .name em {
+      color: var(--brown);
     }
 
-    .person-tagline {
-      font-family: var(--font-serif);
-      font-style: italic;
-      font-size: clamp(16px, 1.45vw, 20px);
-      line-height: 1.35;
-      color: var(--ink);
-      opacity: 0.88;
-      margin-bottom: clamp(8px, 1.4vh, 14px);
-      max-width: 30ch;
-    }
-
-    .person-location {
-      font-size: clamp(12px, 1.2vh, 13.5px);
-      color: var(--muted);
-      letter-spacing: 0.02em;
-    }
-
-    /* Contact row */
-    .contact-row {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .contact-actions {
+    .role-line {
+      margin-top: 22px;
       display: flex;
       align-items: center;
-      gap: clamp(16px, 1.8vw, 26px);
-    }
-
-    .contact-link {
-      color: var(--ink);
-      text-decoration: none;
-      font-size: clamp(13px, 1.3vh, 14.5px);
-      font-weight: 500;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      transition: color 0.18s ease;
-      outline-offset: 4px;
-    }
-
-    .contact-link:hover {
-      color: var(--accent);
-    }
-
-    .contact-link:focus-visible {
-      outline: 2px solid var(--accent);
-      border-radius: 2px;
-    }
-
-    .link-arrow {
+      gap: 12px;
       font-size: 12px;
-      line-height: 1;
-      display: inline-block;
-      color: var(--accent);
-      transition: transform 0.18s ease;
-    }
-
-    .contact-link:hover .link-arrow {
-      transform: translate(2px, -2px);
-    }
-
-    .contact-detail {
-      font-size: clamp(11px, 1.1vh, 12px);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
       color: var(--muted);
-      letter-spacing: 0.01em;
     }
 
-    /* ==========================================================================
-       RIGHT PANEL — THE WORK
-       3-row grid: stats (top) align with monogram, tabs/content
-       (middle) vertically center to align with the eyebrow/name,
-       footer (bottom) aligns with the contact links.
-       ========================================================================== */
-    .panel-right {
-      background: var(--paper);
-      padding: clamp(24px, 4vh, 52px) clamp(24px, 4.2vw, 60px);
+    .role-line::before {
+      content: "";
+      width: 32px;
+      height: 1px;
+      background: var(--brown);
+    }
+
+    /* ---------- Right: details ---------- */
+    .main {
+      padding: var(--padY) var(--pad);
       display: grid;
       grid-template-rows: auto 1fr auto;
-      height: 100%;
-      overflow: hidden;
     }
 
-    /* Stats row — capped width so the four items read as one tight group */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, auto);
-      gap: clamp(10px, 1.2vw, 16px);
-      column-gap: clamp(20px, 2.8vw, 40px);
-      align-items: baseline;
-      max-width: 580px;
-      padding-bottom: clamp(16px, 2.2vh, 24px);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .stat-card {
+    .bar {
       display: flex;
-      flex-direction: column;
-      gap: 3px;
-    }
-
-    .stat-value {
-      font-family: var(--font-serif);
-      font-size: clamp(24px, 2.3vw, 36px);
-      font-weight: 500;
-      line-height: 1;
-      color: var(--ink);
-      letter-spacing: -0.02em;
-      font-variation-settings: "opsz" 36;
-      font-variant-numeric: lining-nums tabular-nums;
-      white-space: nowrap;
-    }
-
-    .stat-accent {
-      color: var(--accent);
-      font-size: 0.78em;
-      font-weight: 400;
-    }
-
-    .stat-unit {
-      font-size: 0.86em;
-    }
-
-    .stat-description {
-      font-size: clamp(10px, 1vh, 11px);
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
       color: var(--muted);
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      font-weight: 600;
-      line-height: 1.25;
     }
 
-    /* Work area: vertically centered in the middle grid row
-       so the tab header roughly aligns with the left panel's eyebrow. */
-    .work-container {
+    .clock {
+      font-variant-numeric: tabular-nums;
+    }
+
+    .bar .dot {
+      display: inline-block;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--brown);
+      margin: 0 10px 2px;
+    }
+
+    .content {
       align-self: center;
-      display: flex;
-      flex-direction: column;
-      min-height: 0;
       width: 100%;
+      max-width: 520px;
     }
 
-    /* Tabs header — serves as the only horizontal rule below stats */
-    .tabs-header {
-      position: relative;
-      border-bottom: 1px solid var(--line);
-      margin-bottom: clamp(14px, 2vh, 22px);
-    }
-
-    .tablist-nav {
-      position: relative;
-      display: inline-flex;
-      gap: clamp(14px, 2vw, 28px);
-      padding-bottom: 8px;
-    }
-
-    .tab-trigger {
-      background: none;
-      border: none;
-      font-family: var(--font-sans);
-      font-size: clamp(13px, 1.3vh, 14px);
-      font-weight: 500;
-      color: var(--muted);
-      cursor: pointer;
-      padding: 2px 1px;
-      transition: color 0.18s ease;
-      outline: none;
-    }
-
-    .tab-trigger:hover {
-      color: var(--ink);
-    }
-
-    .tab-trigger[aria-selected="true"] {
-      color: var(--ink);
-      font-weight: 600;
-    }
-
-    .tab-trigger:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 4px;
-      border-radius: 2px;
-    }
-
-    .tab-active-indicator {
-      position: absolute;
-      bottom: -1px;
-      left: 0;
-      height: 2px;
-      background: var(--accent);
-      transition: left 0.22s cubic-bezier(0.2, 0, 0, 1),
-                  width 0.22s cubic-bezier(0.2, 0, 0, 1);
-    }
-
-    /* Tab panels: CSS grid stack so all panels occupy the same cell,
-       giving a stable height regardless of which tab is active. */
-    .panels-viewport {
-      flex: 1;
-      display: grid;
-      min-height: 0;
-    }
-
-    .tab-view {
-      grid-area: 1 / 1;
-      align-self: start;
-      animation: tabFadeIn 0.2s ease-out;
-    }
-
-    .tab-view[hidden] {
-      display: none;
-    }
-
-    @keyframes tabFadeIn {
-      from { opacity: 0; transform: translateY(3px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Footer sits in the third grid row, aligned with the left panel's contact */
-    .site-footer {
-      align-self: end;
-    }
-
-    .copyright-note {
-      font-size: 11px;
-      color: var(--muted);
-      letter-spacing: 0.02em;
-    }
-
-    /* ==========================================================================
-       PANEL CONTENT STYLES
-       ========================================================================== */
-
-    /* Experience */
-    .job-title {
-      font-size: clamp(15px, 1.45vw, 18px);
-      font-weight: 600;
-      color: var(--ink);
-      line-height: 1.25;
+    .intro {
+      font-family: var(--serif);
+      font-size: clamp(26px, 2.6vw, 34px);
+      line-height: 1.2;
       letter-spacing: -0.01em;
     }
 
-    .meta-subtitle {
-      font-size: clamp(12px, 1.2vh, 13px);
-      color: var(--ink);
-      margin-top: 3px;
+    .intro em {
+      color: var(--brown);
     }
 
-    .meta-muted {
-      color: var(--muted);
+    .facts {
+      margin-top: clamp(28px, 5vh, 44px);
+      border-top: 1px solid var(--brown);
     }
 
-    .accent-tag-badge {
-      display: inline-block;
-      font-size: clamp(10px, 1vh, 11px);
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      color: var(--accent);
-      background: rgba(143, 69, 38, 0.07);
-      border: 1px solid rgba(143, 69, 38, 0.22);
-      border-radius: 3px;
-      padding: 2px 7px;
-      margin: clamp(5px, 0.9vh, 8px) 0 clamp(8px, 1.2vh, 14px) 0;
+    .fact {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 15px;
     }
 
-    .bullets-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: clamp(4px, 0.85vh, 7px);
-    }
-
-    .bullets-list li {
-      font-size: clamp(12.5px, 1.25vh, 13.5px);
-      color: var(--ink);
-      position: relative;
-      padding-left: 14px;
-      line-height: 1.35;
-    }
-
-    .bullets-list li::before {
-      content: "–";
-      position: absolute;
-      left: 0;
-      color: var(--accent);
-      font-weight: 500;
-    }
-
-    /* Education */
-    .edu-block {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .edu-block + .edu-block {
-      margin-top: clamp(10px, 1.4vh, 16px);
-    }
-
-    .edu-degree {
-      font-size: clamp(14.5px, 1.4vw, 17px);
-      font-weight: 600;
-      color: var(--ink);
-      line-height: 1.3;
-    }
-
-    .edu-detail {
-      font-size: clamp(12.5px, 1.2vh, 13.5px);
-      color: var(--ink);
-    }
-
-    .edu-institution {
-      font-size: clamp(12px, 1.15vh, 13px);
-      color: var(--muted);
-      margin-top: clamp(10px, 1.6vh, 16px);
-    }
-
-    /* Leadership */
-    .leadership-entries {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: clamp(6px, 1vh, 10px);
-    }
-
-    .leadership-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      font-size: clamp(12.5px, 1.25vh, 13.5px);
-      padding-bottom: 5px;
-      border-bottom: 1px dashed var(--line);
-    }
-
-    .leadership-title {
-      color: var(--ink);
-      font-weight: 500;
-    }
-
-    .leadership-period {
-      color: var(--muted);
-      font-variant-numeric: tabular-nums;
-      font-size: clamp(12px, 1.15vh, 13px);
-      white-space: nowrap;
-      margin-left: 14px;
-    }
-
-    /* Award: distinct treatment, separated from the list */
-    .award-block {
-      margin-top: clamp(10px, 1.4vh, 14px);
-      padding-top: clamp(8px, 1.2vh, 12px);
-    }
-
-    .award-label {
-      font-size: clamp(10px, 1vh, 11px);
+    .fact dt {
+      font-size: 12px;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
       color: var(--muted);
-      font-weight: 600;
-      margin-bottom: 3px;
+      padding-top: 3px;
     }
 
-    .award-name {
-      font-size: clamp(12.5px, 1.25vh, 13.5px);
-      font-weight: 500;
-      color: var(--ink);
-    }
-
-    .award-year {
-      color: var(--muted);
-      font-variant-numeric: tabular-nums;
-    }
-
-    /* Skills */
-    .skills-cluster + .skills-cluster {
-      margin-top: clamp(10px, 1.6vh, 16px);
-    }
-
-    .skills-group-label {
-      font-size: clamp(10px, 1vh, 11px);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--muted);
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-
-    .skills-tag-grid {
+    .links {
+      margin-top: clamp(26px, 4.5vh, 40px);
       display: flex;
       flex-wrap: wrap;
-      gap: 5px 6px;
+      gap: 12px;
+      list-style: none;
     }
 
-    .skill-tag {
+    .links a {
       display: inline-flex;
       align-items: center;
-      font-size: clamp(11.5px, 1.15vh, 12.5px);
-      color: var(--ink);
-      background: var(--paper-deep);
-      border: 1px solid var(--line);
+      gap: 8px;
+      padding: 10px 18px;
+      border: 1px solid var(--brown);
       border-radius: 999px;
-      padding: 3px 10px;
-      line-height: 1.3;
+      color: var(--brown);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: background 0.25s ease, color 0.25s ease;
     }
 
-    /* ==========================================================================
-       ENTRANCE ANIMATIONS (reduced-motion respected)
-       ========================================================================== */
+    .links a:hover {
+      background: var(--brown);
+      color: var(--paper);
+    }
+
+    .links a span {
+      display: inline-block;
+      transition: transform 0.25s ease;
+    }
+
+    .links a:hover span {
+      transform: translate(2px, -2px);
+    }
+
+    a:focus-visible {
+      outline: 2px solid var(--brown);
+      outline-offset: 3px;
+    }
+
+    /* ---------- Entrance ---------- */
     @media (prefers-reduced-motion: no-preference) {
-      .fade-stagger {
+      .fade {
         opacity: 0;
         transform: translateY(8px);
-        animation: slideUp 0.48s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        animation: fade 0.9s cubic-bezier(.16, 1, .3, 1) forwards;
       }
-      .stagger-1 { animation-delay: 0.04s; }
-      .stagger-2 { animation-delay: 0.10s; }
-      .stagger-3 { animation-delay: 0.16s; }
-      .stagger-4 { animation-delay: 0.22s; }
-    }
 
-    @keyframes slideUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ==========================================================================
-       SHORT-VIEWPORT SAFETY VALVE
-       When the viewport is shorter than ~680px (e.g. 1366×768 with thick
-       browser chrome), tighten spacing first; if still tight, allow scroll.
-       ========================================================================== */
-    @media (max-height: 680px) and (min-width: 900px) {
-      .panel-left  { padding-top: 18px; padding-bottom: 18px; }
-      .panel-right { padding-top: 18px; padding-bottom: 18px; }
-      .stats-grid  { padding-bottom: 12px; }
-      .work-container { padding-top: 12px; }
-      .tabs-header { margin-bottom: 10px; }
-      .person-name { margin-bottom: 10px; }
-      .person-tagline { margin-bottom: 6px; }
-    }
-
-    @media (max-height: 580px) and (min-width: 900px) {
-      html, body {
-        max-height: none;
-        overflow-y: auto;
+      .f2 {
+        animation-delay: .15s;
       }
-      .viewport-shell {
-        max-height: none;
-        min-height: 100dvh;
+
+      .f3 {
+        animation-delay: .3s;
+      }
+
+      .f4 {
+        animation-delay: .45s;
+      }
+
+      @keyframes fade {
+        to {
+          opacity: 1;
+          transform: none;
+        }
       }
     }
 
-    /* ==========================================================================
-       MOBILE / TABLET (< 900px): stack vertically, allow scroll
-       ========================================================================== */
-    @media (max-width: 899px) {
-      html, body {
-        height: auto !important;
-        max-height: none !important;
-        min-height: 100dvh;
-        overflow-x: hidden !important;
-        overflow-y: auto !important;
+    @media (prefers-reduced-motion: reduce) {
+      .side::after {
+        animation: none;
       }
+    }
 
-      .viewport-shell {
+    /* ======================= MOBILE ======================= */
+    @media (max-width: 860px) {
+      .split {
         grid-template-columns: 1fr;
-        height: auto;
-        max-height: none;
-        overflow: visible;
       }
 
-      .panel-left {
-        border-right: none;
-        border-bottom: 1px solid var(--line);
-        padding: 32px 20px;
-        gap: 24px;
-        height: auto;
-        overflow: visible;
+      .side {
+        gap: 64px;
+        padding: 28px 24px 36px;
       }
 
-      .panel-left::before {
-        font-size: clamp(120px, 36vw, 200px);
-        right: 8px;
-        bottom: 20px;
+      .side::after {
+        top: auto;
+        bottom: 0;
+        width: 100%;
+        height: 1px;
+        transform-origin: left;
+        animation-name: drawX;
       }
 
-      .panel-right {
-        padding: 32px 20px;
-        display: flex;
-        flex-direction: column;
-        height: auto;
-        overflow: visible;
+      @keyframes drawX {
+        from {
+          transform: scaleX(0);
+        }
       }
 
-      .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 16px 12px;
+      .main {
+        padding: 36px 24px 28px;
+        gap: 40px;
       }
 
-      .tablist-nav {
-        flex-wrap: wrap;
-        gap: 12px 16px;
+      .bar.top {
+        display: none;
       }
 
-      .panels-viewport {
-        display: block;
-      }
-
-      .site-footer {
-        padding-top: 20px;
-        padding-bottom: 12px;
+      .fact {
+        grid-template-columns: 1fr;
+        gap: 2px;
       }
     }
   </style>
 </head>
-<body>
 
-  <!-- Paper grain noise overlay -->
-  <svg class="paper-grain" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-    <filter id="paperNoise">
-      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch" />
-      <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" />
+<body>
+  <svg class="grain" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <filter id="n">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch" />
+      <feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" />
     </filter>
-    <rect width="100%" height="100%" filter="url(#paperNoise)" fill="#000" />
+    <rect width="100%" height="100%" filter="url(#n)" />
   </svg>
 
-  <main class="viewport-shell">
+  <div class="split">
 
-    <!-- ==================================================================
-         LEFT PANEL — IDENTITY
-         ================================================================== -->
-    <section class="panel-left" aria-label="Personal identity">
+    <!-- LEFT: name -->
+    <aside class="side">
+      <span class="mark fade" aria-hidden="true">KG</span>
+      <div class="fade f2">
+        <h1 class="name"><span>Kyle</span><em>Glover</em></h1>
+        <p class="role-line">Project Manager · UNCW</p>
+      </div>
+    </aside>
 
-      <!-- Top: monogram -->
-      <div class="fade-stagger stagger-1">
-        <div class="monogram-badge" role="img" aria-label="K G monogram">KG</div>
+    <!-- RIGHT: details -->
+    <div class="main">
+      <div class="bar top fade">
+        <span>Wilmington, NC<span class="dot"></span><span class="clock" id="clock"></span></span>
+        <span>kyleglover.me</span>
       </div>
 
-      <!-- Middle: name block -->
-      <div class="identity-body fade-stagger stagger-2">
-        <div class="eyebrow-label">Project Manager · UNC Wilmington</div>
-        <h1 class="person-name">Kyle<br>Glover</h1>
-        <p class="person-tagline">Turning complex projects into measurable outcomes.</p>
-        <p class="person-location">Wilmington, NC</p>
-      </div>
+      <main class="content">
+        <p class="intro fade f2">Planning campus events and engagement at <em>UNC&nbsp;Wilmington.</em></p>
 
-      <!-- Bottom: contact -->
-      <div class="contact-row fade-stagger stagger-3">
-        <div class="contact-actions">
-          <a href="mailto:thekyleglover@gmail.com" class="contact-link" title="thekyleglover@gmail.com">
-            thekyleglover@gmail.com <span class="link-arrow" aria-hidden="true">↗</span>
-          </a>
-        </div>
-        <div class="contact-actions">
-          <!-- TODO: Replace "#" with your LinkedIn profile URL -->
-          <a href="#" class="contact-link" rel="noopener noreferrer" aria-label="LinkedIn profile (link placeholder)">
-            LinkedIn <span class="link-arrow" aria-hidden="true">↗</span>
-          </a>
-        </div>
-      </div>
-
-    </section>
-
-    <!-- ==================================================================
-         RIGHT PANEL — THE WORK
-         ================================================================== -->
-    <section class="panel-right" aria-label="Professional background">
-
-      <!-- Stats row (hairline is built into the bottom border of this container) -->
-      <div class="stats-grid fade-stagger stagger-1">
-        <div class="stat-card">
-          <div class="stat-value"><span class="stat-accent">$</span>750<span class="stat-unit">K</span><span class="stat-accent">+</span></div>
-          <div class="stat-description">budget managed</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value">150<span class="stat-accent">+</span></div>
-          <div class="stat-description">events a year</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value">21<span class="stat-unit">K</span><span class="stat-accent">+</span></div>
-          <div class="stat-description">attendees a year</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value">45<span class="stat-unit">K</span><span class="stat-accent">+</span></div>
-          <div class="stat-description">social audience</div>
-        </div>
-      </div>
-
-      <!-- Tabs + panels fill the remaining space -->
-      <div class="work-container fade-stagger stagger-2">
-
-        <div class="tabs-header">
-          <div role="tablist" aria-label="Résumé sections" class="tablist-nav">
-            <button role="tab" id="tab-experience"  aria-selected="true"  aria-controls="panel-experience"  class="tab-trigger">Experience</button>
-            <button role="tab" id="tab-education"   aria-selected="false" aria-controls="panel-education"   class="tab-trigger" tabindex="-1">Education</button>
-            <button role="tab" id="tab-leadership"  aria-selected="false" aria-controls="panel-leadership"  class="tab-trigger" tabindex="-1">Leadership</button>
-            <button role="tab" id="tab-skills"      aria-selected="false" aria-controls="panel-skills"      class="tab-trigger" tabindex="-1">Skills</button>
-            <div class="tab-active-indicator" aria-hidden="true"></div>
+        <dl class="facts fade f3">
+          <div class="fact">
+            <dt>Now</dt>
+            <dd>Project Manager, Campus Events &amp; Engagement</dd>
           </div>
-        </div>
+          <div class="fact">
+            <dt>Education</dt>
+            <dd>MPA &amp; B.A. Political Science, UNCW</dd>
+          </div>
+          <div class="fact">
+            <dt>Also</dt>
+            <dd>Vice Chair, UNCW Staff Senate</dd>
+          </div>
+        </dl>
 
-        <!-- All four panels share a single grid cell so switching
-             tabs never changes the reserved height. -->
-        <div class="panels-viewport">
+        <ul class="links fade f4">
+          <li><a href="mailto:thekyleglover@gmail.com">Email <span aria-hidden="true">↗</span></a></li>
+          <li><a href="https://www.linkedin.com/in/evali0721/" target="_blank" rel="noopener noreferrer">LinkedIn <span
+                aria-hidden="true">↗</span></a></li>
+        </ul>
+      </main>
 
-          <!-- EXPERIENCE -->
-          <article role="tabpanel" id="panel-experience" aria-labelledby="tab-experience" class="tab-view" tabindex="0">
-            <h2 class="job-title">Project Manager, Campus Events &amp; Engagement</h2>
-            <div class="meta-subtitle">UNC Wilmington — <span class="meta-muted">Oct 2022 – Present</span></div>
-            <div>
-              <span class="accent-tag-badge">Interim Asst. Director — May 2026 – Present</span>
-            </div>
-            <ul class="bullets-list">
-              <!-- Bullets complement the stats instead of repeating them -->
-              <li>Leads Campus Life marketing: 1 manager + 7 specialists</li>
-              <li>Marketing coverage across 5 Campus Life units</li>
-              <li>Negotiates artist &amp; performer contracts</li>
-              <li>Builds KPIs and mid/end-of-year reports</li>
-              <li>Coordinates "Where You Will" university brand campaign</li>
-              <li>Stewards the student Permanent Art Collection (100+ pieces)</li>
-            </ul>
-          </article>
-
-          <!-- EDUCATION -->
-          <article role="tabpanel" id="panel-education" aria-labelledby="tab-education" class="tab-view" tabindex="0" hidden>
-            <div class="edu-block">
-              <h2 class="edu-degree">Master of Public Administration</h2>
-              <p class="edu-detail">Managerial &amp; Analytical Skills</p>
-            </div>
-            <div class="edu-block">
-              <h2 class="edu-degree">B.A. Political Science</h2>
-              <p class="edu-detail">Minor in History</p>
-            </div>
-            <p class="edu-institution">University of North Carolina Wilmington</p>
-          </article>
-
-          <!-- LEADERSHIP -->
-          <article role="tabpanel" id="panel-leadership" aria-labelledby="tab-leadership" class="tab-view" tabindex="0" hidden>
-            <h2 class="sr-only">Leadership &amp; Service</h2>
-            <ul class="leadership-entries">
-              <li class="leadership-item">
-                <span class="leadership-title">Vice Chair, UNCW Staff Senate</span>
-                <span class="leadership-period">2026–</span>
-              </li>
-              <li class="leadership-item">
-                <span class="leadership-title">CliftonStrengths Coach</span>
-                <span class="leadership-period">2023–</span>
-              </li>
-              <li class="leadership-item">
-                <span class="leadership-title">Leadership Retreat Facilitator</span>
-                <span class="leadership-period">2024–</span>
-              </li>
-              <li class="leadership-item">
-                <span class="leadership-title">NASPA New Professionals Institute</span>
-                <span class="leadership-period">2024</span>
-              </li>
-            </ul>
-            <div class="award-block">
-              <div class="award-label">Recognition</div>
-              <div class="award-name">Collaboration Champion, UNCW Student Affairs — <span class="award-year">2026</span></div>
-            </div>
-          </article>
-
-          <!-- SKILLS -->
-          <article role="tabpanel" id="panel-skills" aria-labelledby="tab-skills" class="tab-view" tabindex="0" hidden>
-            <h2 class="sr-only">Professional Skills &amp; Tools</h2>
-            <div class="skills-cluster">
-              <div class="skills-group-label">Strategy</div>
-              <div class="skills-tag-grid">
-                <span class="skill-tag">Project Management</span>
-                <span class="skill-tag">Budgeting</span>
-                <span class="skill-tag">Marketing Strategy</span>
-                <span class="skill-tag">KPI Reporting</span>
-                <span class="skill-tag">Contract Negotiation</span>
-              </div>
-            </div>
-            <div class="skills-cluster">
-              <div class="skills-group-label">Tools</div>
-              <div class="skills-tag-grid">
-                <span class="skill-tag">Asana</span>
-                <span class="skill-tag">MS Planner</span>
-                <span class="skill-tag">Microsoft 365</span>
-                <span class="skill-tag">Canva</span>
-                <span class="skill-tag">Qualtrics</span>
-                <span class="skill-tag">Anthology Engage</span>
-                <span class="skill-tag">TouchNet</span>
-                <span class="skill-tag">Claude AI</span>
-              </div>
-            </div>
-          </article>
-
-        </div>
-      </div>
-
-      <footer class="site-footer fade-stagger stagger-3">
-        <p class="copyright-note">&copy; 2026 Kyle Glover</p>
+      <footer class="bar fade f4">
+        <span>© 2026 Kyle Glover</span>
       </footer>
+    </div>
 
-    </section>
+  </div>
 
-  </main>
-
-  <!-- ====================================================================
-       VANILLA TAB CONTROLLER — keyboard-accessible, ~35 lines
-       ==================================================================== -->
   <script>
-    const tabs      = document.querySelectorAll('[role="tab"]');
-    const panels    = document.querySelectorAll('[role="tabpanel"]');
-    const indicator = document.querySelector('.tab-active-indicator');
-
-    function updateIndicator(tab) {
-      if (!indicator || !tab) return;
-      indicator.style.left  = tab.offsetLeft + 'px';
-      indicator.style.width = tab.offsetWidth + 'px';
-    }
-
-    function selectTab(tab) {
-      tabs.forEach(t => {
-        t.setAttribute('aria-selected', 'false');
-        t.setAttribute('tabindex', '-1');
-      });
-      panels.forEach(p => (p.hidden = true));
-
-      tab.setAttribute('aria-selected', 'true');
-      tab.removeAttribute('tabindex');
-      tab.focus();
-
-      const panel = document.getElementById(tab.getAttribute('aria-controls'));
-      if (panel) panel.hidden = false;
-      updateIndicator(tab);
-    }
-
-    tabs.forEach((tab, i) => {
-      tab.addEventListener('click', () => selectTab(tab));
-      tab.addEventListener('keydown', e => {
-        let next = i;
-        if      (e.key === 'ArrowRight') next = (i + 1) % tabs.length;
-        else if (e.key === 'ArrowLeft')  next = (i - 1 + tabs.length) % tabs.length;
-        else if (e.key === 'Home')       next = 0;
-        else if (e.key === 'End')        next = tabs.length - 1;
-        else return;
-        e.preventDefault();
-        selectTab(tabs[next]);
-      });
-    });
-
-    /* Wait for web fonts before measuring the indicator so widths are correct. */
-    document.fonts.ready.then(() => {
-      const active = document.querySelector('[role="tab"][aria-selected="true"]');
-      if (active) updateIndicator(active);
-    });
-
-    window.addEventListener('resize', () => {
-      const active = document.querySelector('[role="tab"][aria-selected="true"]');
-      if (active) updateIndicator(active);
-    });
+    // Live local time in Wilmington, NC
+    const clock = document.getElementById('clock');
+    const fmt = new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', hour: 'numeric', minute: '2-digit' });
+    const tick = () => { clock.textContent = fmt.format(new Date()); };
+    tick();
+    setInterval(tick, 15000);
   </script>
 </body>
+
 </html>
