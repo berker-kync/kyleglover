@@ -111,19 +111,21 @@
       position: relative;
     }
 
-    /* Faint background monogram watermark for presence */
+    /* Faint background monogram watermark — anchored bottom-right,
+       below the text block, clipped to the panel so it doesn't
+       bleed into the vertical divider. */
     .panel-left::before {
       content: "KG";
       position: absolute;
-      right: clamp(-20px, -1vw, -10px);
-      bottom: clamp(60px, 12vh, 140px);
+      right: clamp(8px, 1.5vw, 24px);
+      bottom: clamp(40px, 8vh, 80px);
       font-family: var(--font-serif);
-      font-size: clamp(180px, 22vw, 320px);
+      font-size: clamp(160px, 18vw, 280px);
       font-weight: 700;
       line-height: 1;
       letter-spacing: -0.04em;
       color: var(--ink);
-      opacity: 0.028;
+      opacity: 0.022;
       pointer-events: none;
       user-select: none;
       font-variation-settings: "opsz" 144;
@@ -244,22 +246,27 @@
 
     /* ==========================================================================
        RIGHT PANEL — THE WORK
+       3-row grid: stats (top) align with monogram, tabs/content
+       (middle) vertically center to align with the eyebrow/name,
+       footer (bottom) aligns with the contact links.
        ========================================================================== */
     .panel-right {
       background: var(--paper);
       padding: clamp(24px, 4vh, 52px) clamp(24px, 4.2vw, 60px);
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
       height: 100%;
       overflow: hidden;
     }
 
-    /* Stats row */
+    /* Stats row — capped width so the four items read as one tight group */
     .stats-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: clamp(10px, 1.3vw, 22px);
+      grid-template-columns: repeat(4, auto);
+      gap: clamp(10px, 1.2vw, 16px);
+      column-gap: clamp(20px, 2.8vw, 40px);
       align-items: baseline;
+      max-width: 580px;
       padding-bottom: clamp(16px, 2.2vh, 24px);
       border-bottom: 1px solid var(--line);
     }
@@ -301,13 +308,14 @@
       line-height: 1.25;
     }
 
-    /* Work area: tabs + panels fill the remaining space */
+    /* Work area: vertically centered in the middle grid row
+       so the tab header roughly aligns with the left panel's eyebrow. */
     .work-container {
-      flex: 1;
+      align-self: center;
       display: flex;
       flex-direction: column;
       min-height: 0;
-      padding-top: clamp(16px, 2.2vh, 24px);
+      width: 100%;
     }
 
     /* Tabs header — serves as the only horizontal rule below stats */
@@ -385,10 +393,9 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* Footer pinned at the bottom of the right panel */
+    /* Footer sits in the third grid row, aligned with the left panel's contact */
     .site-footer {
-      padding-top: clamp(8px, 1.2vh, 14px);
-      margin-top: auto;
+      align-self: end;
     }
 
     .copyright-note {
@@ -647,13 +654,15 @@
       }
 
       .panel-left::before {
-        font-size: clamp(140px, 40vw, 220px);
-        right: -10px;
-        bottom: 30px;
+        font-size: clamp(120px, 36vw, 200px);
+        right: 8px;
+        bottom: 20px;
       }
 
       .panel-right {
         padding: 32px 20px;
+        display: flex;
+        flex-direction: column;
         height: auto;
         overflow: visible;
       }
@@ -779,7 +788,7 @@
             <ul class="bullets-list">
               <!-- Bullets complement the stats instead of repeating them -->
               <li>Leads Campus Life marketing: 1 manager + 7 specialists</li>
-              <li>Manages $750K operating budget for the department</li>
+              <li>Marketing coverage across 5 Campus Life units</li>
               <li>Negotiates artist &amp; performer contracts</li>
               <li>Builds KPIs and mid/end-of-year reports</li>
               <li>Coordinates "Where You Will" university brand campaign</li>
