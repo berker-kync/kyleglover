@@ -95,6 +95,20 @@
 
   .bd-confetti { position: fixed; inset: 0; z-index: 1001; pointer-events: none; }
 
+  /* Phone turned sideways: smaller text so it doesn't collide with the seal */
+  @media (orientation: landscape) and (max-height: 520px) {
+    .bd-note { bottom: 4vh; }
+    .bd-to   { margin-bottom: 4px; font-size: 10px; }
+    .bd-msg  { font-size: clamp(28px, 5vw, 40px); }
+    .bd-hint { margin-top: 6px; font-size: 12px; }
+    .bd-seal { width: 70px; font-size: 22px; top: 50%; }
+    .bd-seal small { font-size: 8px; bottom: 18%; }
+    .bd-flap { clip-path: polygon(0 0, 100% 0, 50% 50%); }
+    .bd-left  { clip-path: polygon(0 0, 52% 46%, 0 100%); }
+    .bd-right { clip-path: polygon(100% 0, 48% 46%, 100% 100%); }
+    .bd-bottom { clip-path: polygon(0 100%, 50% 38%, 100% 100%); }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .bd *, .bd { transition-duration: .01s !important; animation: none !important; }
   }
