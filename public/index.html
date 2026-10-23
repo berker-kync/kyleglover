@@ -202,6 +202,7 @@
       transition: transform .9s cubic-bezier(.2,.75,.25,1);
       cursor: pointer;
     }
+    .c-card:focus-visible { outline-offset: 6px; border-radius: 8px; }
     .c-card.flipped { --flip: 180deg; }
 
     .c-face {
@@ -258,10 +259,10 @@
     .c-intro em { color: var(--brown); }
     .c-contact { list-style: none; display: grid; gap: 6px; }
     .c-contact a {
-      display: inline-flex; align-items: baseline; gap: 10px;
-      font-size: 14px; color: var(--ink); text-decoration: none;
+      display: inline-flex; align-items: baseline; gap: 8px;
+      font-size: min(14px, calc(var(--card-w) * .044)); color: var(--ink); text-decoration: none;
     }
-    .c-contact .k { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--brown); width: 6.6em; }
+    .c-contact .k { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--brown); width: 5.8em; flex-shrink: 0; }
 
     /* back */
     .c-back {
@@ -397,12 +398,12 @@
   <div class="phone">
     <div class="c-scene scene">
      <div class="c-tilt" id="tilt">
-      <div class="c-card" id="card">
+      <div class="c-card" id="card" tabindex="0" aria-label="Business card — press Enter to flip">
         <section class="c-face c-front" id="front" aria-label="Business card, front">
           <div class="c-top">
             <span class="c-mark" aria-hidden="true">KG</span>
             <div>
-              <p class="c-name"><span>Kyle</span><em>Glover</em></p>
+              <h1 class="c-name"><span>Kyle</span><em>Glover</em></h1>
               <p class="c-title">Project Manager · UNCW</p>
             </div>
           </div>
@@ -452,6 +453,10 @@
       front.querySelectorAll('a').forEach(a => a.tabIndex = on ? -1 : 0);
     }
     card.addEventListener('click', e => { if (!e.target.closest('a')) flip(); });
+    card.addEventListener('keydown', e => {
+      // Only when the card itself has focus, so Enter still opens its links
+      if (e.target === card && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); flip(); }
+    });
     btn.addEventListener('click', flip);
 
     /* ---- Tilt the card with the phone's motion ---- */
